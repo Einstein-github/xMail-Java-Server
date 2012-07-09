@@ -29,4 +29,13 @@ public class InfoPacket implements Packet {
 		return type;
 	}
 
+	public String get(String key){
+		for(ServerVariable variable : variables){
+			if(variable.key.equals(key)){
+				return variable.value;
+			}
+		}
+		return null;
+	}
+
 }

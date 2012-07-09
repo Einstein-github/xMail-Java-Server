@@ -46,12 +46,12 @@ public class XMailServer {
 		dead = true;
 	}
 
-	public void incomingMail(Mail mail, ThreadedClient client){
-		// TODO
-	}
-
 	public static XMailServer getInstance(){
 		return instance;
+	}
+
+	public void saveMail(Mail mail){
+
 	}
 
 }

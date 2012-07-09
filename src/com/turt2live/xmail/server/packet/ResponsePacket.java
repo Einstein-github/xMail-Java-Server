@@ -27,6 +27,11 @@ public class ResponsePacket implements Packet {
 		}
 	}
 
+	public ResponsePacket(Status status, String message){
+		this.status = status;
+		this.message = message;
+	}
+
 	public Map<String, Map<String, String>> getMail(){
 		return mail;
 	}

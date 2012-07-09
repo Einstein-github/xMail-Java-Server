@@ -4,22 +4,45 @@ import java.io.Serializable;
 
 public class Mail implements Serializable {
 
-	private static final long serialVersionUID = -3832504963142301634L;
-	private String to, from, message, apiKey, attachments;
+	public static enum MailType{
+		COMPLEX, SIMPLE;
+	}
 
-	public Mail(String to, String from, String message, String apiKey, String attachments){
+	private static final long serialVersionUID = -3832504963142301634L;
+	private String to, from, message, apiKey, attachments, UID, PID;
+	private MailType type;
+
+	public Mail(String to, String from, String message, String apiKey, String UID, String PID, String attachments){
 		this.to = to;
 		this.from = from;
 		this.message = message;
 		this.apiKey = apiKey;
 		this.attachments = attachments;
+		this.type = MailType.COMPLEX;
+		this.UID = UID;
+		this.PID = PID;
 	}
 
-	public Mail(String to, String from, String message, String apiKey){
+	public Mail(String to, String from, String message, String apiKey, String UID, String PID){
 		this.to = to;
 		this.from = from;
 		this.message = message;
 		this.apiKey = apiKey;
+		this.type = MailType.SIMPLE;
+		this.UID = UID;
+		this.PID = PID;
+	}
+
+	public String getUID(){
+		return UID;
+	}
+
+	public String getPID(){
+		return PID;
+	}
+
+	public MailType getType(){
+		return type;
 	}
 
 	public String getTo(){
