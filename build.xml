@@ -7,9 +7,9 @@
     <property name="lib" location="lib" />
     <property name="resources" location="resources" />
     <property name="jd" location="javadocs" />
-    <path id="classpath" >
+    <!--<path id="classpath" >
         <fileset dir="${lib}" includes="**" />
-    </path>
+    </path>-->
     <target name="clean" >
         <echo>Cleaning</echo>
         <!--<delete dir="${build}" />-->
@@ -21,7 +21,8 @@
     </target>
     <target name="compile" depends="clean" >
         <echo>Compiling </echo>
-        <javac classpathref="classpath" destdir="${build}" includeantruntime="false" srcdir="${src}" />
+        <!--<javac classpathref="classpath" destdir="${build}" includeantruntime="false" srcdir="${src}" />-->
+    	<javac destdir="${build}" includeantruntime="false" srcdir="${src}" />
     </target>
     <target name="build" depends="compile" >
         <echo>Building</echo>
