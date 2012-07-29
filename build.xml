@@ -32,11 +32,19 @@
         <!--<copy todir="${build}/resources" >
             <fileset dir="${resources}" excludes="**/*.java,**/*.form" includes="**" />
         </copy>-->
-        <jar basedir="${build}" compress="true" destfile="${dist}/${ant.project.name}.jar" ></jar>
+        <jar basedir="${build}" compress="true" destfile="${dist}/${ant.project.name}.jar" >
+            <manifest>
+                <attribute name="Main-Class" value="com.turt2live.xmail.server.XMailServer" />
+            </manifest>
+        </jar>
         <copy todir="${build}" >
             <fileset dir="${src}" excludes="**/*.form" includes="**" />
         </copy>
-        <jar basedir="${build}" compress="true" destfile="${dist}/${ant.project.name}-source.jar" ></jar>
+        <jar basedir="${build}" compress="true" destfile="${dist}/${ant.project.name}-source.jar" >
+            <manifest>
+                <attribute name="Main-Class" value="com.turt2live.xmail.server.XMailServer" />
+            </manifest>
+        </jar>
     </target>
     <!-- Thanks to Sleaker for having a build.xml script :) -->
     <target name="javadoc" depends="build">
