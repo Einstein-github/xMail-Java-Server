@@ -25,6 +25,7 @@ public class ResponsePacket implements Packet {
 				keys.put(v.key, v.value);
 			}
 		}
+		this.mail = mail;
 	}
 
 	public ResponsePacket(Status status, String message){

@@ -11,6 +11,7 @@ public class Mail implements Serializable {
 	private static final long serialVersionUID = -3832504963142301634L;
 	private String to, from, message, apiKey, attachments, UID, PID;
 	private MailType type;
+	private boolean read = false;
 
 	public Mail(String to, String from, String message, String apiKey, String UID, String PID, String attachments){
 		this.to = to;
@@ -67,6 +68,22 @@ public class Mail implements Serializable {
 
 	public boolean hasAttachments(){
 		return getAttachments() != null;
+	}
+
+	public void setPID(int pid){
+		this.PID = String.valueOf(pid);
+	}
+
+	public void setUID(String uid){
+		this.UID = uid;
+	}
+
+	public void mark(boolean isRead){
+		read = isRead;
+	}
+
+	public boolean isRead(){
+		return read;
 	}
 
 }
