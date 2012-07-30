@@ -8,7 +8,8 @@ public class User {
 
 	private String username, password, apiKey, lastLogin;
 	private boolean loggedIn = false;
-	private XMailServer xmail = XMailServer.getInstance();
+
+	//private XMailServer xmail = XMailServer.getInstance();
 
 	public User(String un, String pw){
 		this.username = un;
@@ -20,6 +21,9 @@ public class User {
 	}
 
 	public String apikey(){
+		if(apiKey == null){
+			apiKey = APIKey.calculate(username);
+		}
 		return apiKey;
 	}
 
@@ -29,10 +33,8 @@ public class User {
 	}
 
 	public boolean register(){
-		// TODO Auto-generated method stub
 		apiKey = APIKey.calculate(username);
-		// TODO: Validation of username not in use
-		return false;
+		return UserFile.register(username, password);
 	}
 
 	public String getName(){
@@ -48,9 +50,9 @@ public class User {
 	}
 
 	public boolean login(){
-		// TODO: Validation of username/password
-		loggedIn = true;
-		return true;
+		boolean complete = UserFile.login(username, password);
+		loggedIn = complete;
+		return complete;
 	}
 
 }

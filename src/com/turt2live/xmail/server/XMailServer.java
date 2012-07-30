@@ -1,5 +1,6 @@
 package com.turt2live.xmail.server;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -40,6 +41,7 @@ public class XMailServer {
 
 	public XMailServer(int port){
 		instance = this;
+		UserFile.prepare();
 		try{
 			ServerSocket server = new ServerSocket(port);
 			while (!dead){
@@ -71,6 +73,9 @@ public class XMailServer {
 	}
 
 	public boolean isKeyValid(String apiKey, String owner){
+		if(owner.startsWith("CONSOLE@") && apiKey.equalsIgnoreCase("null")){
+			return true; // Console 
+		}
 		for(String holder : apiKeys.keySet()){
 			APIKey key = apiKeys.get(holder);
 			if(key.getHolder().equalsIgnoreCase(owner) && key.getHash().equals(apiKey)){
@@ -110,6 +115,11 @@ public class XMailServer {
 				return u;
 			}
 		}
+		if(un.startsWith("CONSOLE@")){
+			ConsoleUser cu = new ConsoleUser(un);
+			users.add(cu);
+			return cu;
+		}
 		return null;
 	}
 
@@ -129,9 +139,14 @@ public class XMailServer {
 		if(user != null){
 			return user.isLoggedIn();
 		}else{
-			// TODO: Extract user from flat-file
+			User u = null;
+			File userFile = UserFile.getUserFile(username3);
+			if(userFile != null){
+				u = new User(UserFile.extractUsername(userFile), UserFile.extractPassword(userFile));
+				users.add(u);
+			}
+			return u != null && u.isLoggedIn();
 		}
-		return null;
 	}
 
 	public boolean loginUser(String un, String pw){

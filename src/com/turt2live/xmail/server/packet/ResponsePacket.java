@@ -1,5 +1,6 @@
 package com.turt2live.xmail.server.packet;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.turt2live.xmail.server.depend.ServerVariable;
@@ -14,7 +15,7 @@ public class ResponsePacket implements Packet {
 
 	private Status status;
 	private String message;
-	private Map<String, String> keys;
+	private Map<String, String> keys = new HashMap<String, String>();
 	private Map<String, Map<String, String>> mail;
 
 	public ResponsePacket(Status status, String message, Map<String, Map<String, String>> mail, ServerVariable... variables){

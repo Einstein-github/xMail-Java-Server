@@ -94,7 +94,7 @@ public class ThreadedClient implements Runnable {
 			String xUsername = packet.get("username");
 			User user = server.getUser(xUsername);
 			if(user != null){
-				return new ResponsePacket(Status.OK, "Inbox found", user.getMail(), new ServerVariable("unread", String.valueOf(user.getMail().size())), new ServerVariable("username", xUsername));
+				return new ResponsePacket(Status.OK, user.getMail() == null ? "no mail" : "Inbox", user.getMail(), new ServerVariable("unread", String.valueOf(user.getMail() == null ? 0 : user.getMail().size())), new ServerVariable("username", xUsername));
 			}else{
 				return new ResponsePacket(Status.ERROR, "User not found");
 			}
@@ -176,10 +176,10 @@ public class ThreadedClient implements Runnable {
 			}else{
 				return new ResponsePacket(Status.ERROR, "Unknown ident");
 			}
-			if(server.isKeyValid(from, apiKey1)){
+			if(server.isKeyValid(apiKey1, from)){
 				server.saveMail(mail1);
 			}else{
-				return new ResponsePacket(Status.ERROR, "Invalid API Key");
+				return new ResponsePacket(Status.ERROR, "Invalid API Key [" + from + "]");
 			}
 			return new ResponsePacket(Status.OK, "Message sent!");
 		}
