@@ -9,7 +9,7 @@ public class InfoPacket implements Packet {
 	private static final long serialVersionUID = 5045978621191128126L;
 
 	public static enum InfoType{
-		IMPORT_KEY, MARK, INBOX, CHECK_LOGIN, LOGIN, REGISTER, SEND, LOGOUT;
+		IMPORT_KEY, MARK, INBOX, CHECK_LOGIN, LOGIN, REGISTER, SEND, LOGOUT, SENT, READ, INFO;
 	}
 
 	private InfoType type;

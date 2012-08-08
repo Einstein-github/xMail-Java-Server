@@ -23,6 +23,7 @@ public class User {
 	public String apikey(){
 		if(apiKey == null){
 			apiKey = APIKey.calculate(username);
+			XMailServer.getInstance().setKey(username, new APIKey(username, apiKey));
 		}
 		return apiKey;
 	}
@@ -34,6 +35,8 @@ public class User {
 
 	public boolean register(){
 		apiKey = APIKey.calculate(username);
+		XMailServer.getInstance().setKey(username, new APIKey(username, apiKey));
+		System.out.println(apiKey);
 		return UserFile.register(username, password);
 	}
 
@@ -51,7 +54,10 @@ public class User {
 
 	public boolean login(){
 		boolean complete = UserFile.login(username, password);
+		apiKey = APIKey.calculate(username);
+		XMailServer.getInstance().setKey(username, new APIKey(username, apiKey));
 		loggedIn = complete;
+		System.out.println(apiKey);
 		return complete;
 	}
 

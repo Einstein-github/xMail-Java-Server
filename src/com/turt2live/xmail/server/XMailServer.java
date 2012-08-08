@@ -156,4 +156,8 @@ public class XMailServer {
 		return done;
 	}
 
+	public void setKey(String username, APIKey apiKey){
+		apiKeys.put(username, apiKey);
+	}
+
 }
